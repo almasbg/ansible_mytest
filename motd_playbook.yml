@@ -1,0 +1,35 @@
+---
+- hosts: linux
+  #user: root
+  #gather_facts: false
+
+  vars:
+          motd_centos: "Welcome to CentOS Linux\n"
+          motd_ubuntu: "Welcome to Ubuntu Linux\n"
+
+  tasks:
+   - name: Configure a MOTD
+     copy:
+      # src: centos_motd
+       content: "{{ motd_centos }}"
+       dest: /etc/motd
+     notify: MOTD changed
+     when: ansible_distribution == "CentOS"
+ 
+
+  
+   - name: Configure a MOTD
+     copy:
+      # src: centos_motd
+       content: "{{ motd_ubuntu }}"
+       dest: /etc/motd
+     notify: MOTD changed
+     when: ansible_distribution == "Ubuntu"
+        
+
+
+  handlers:
+          - name: MOTD changed
+            debug:
+                    msg: The MOTD was changed
+

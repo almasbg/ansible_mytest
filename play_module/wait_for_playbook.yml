@@ -1,0 +1,9 @@
+---
+
+- hosts: ubuntu3
+
+  tasks:
+          - name: wait for port 80
+            wait_for:
+                    port: 80
+...

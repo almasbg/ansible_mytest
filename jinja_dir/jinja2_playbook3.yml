@@ -1,0 +1,17 @@
+---
+
+- hosts: all
+
+  tasks:
+          - name: Ansible jinja2 if variable id defined
+            debug:
+                    msg: > 
+                            --== Ansible jinja2 if variable is defined ==--
+
+                            {% if example_variable is defined -%}
+                                example variable is defined
+                            {% else -%}
+                                example variable id NOT defined
+                            {% endif %}
+...
+

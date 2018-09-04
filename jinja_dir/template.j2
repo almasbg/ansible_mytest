@@ -1,0 +1,74 @@
+                          
+--== Ansible jinja2 if elif statement ==--
+
+{% if ansible_hostname == "ubuntuc" -%}
+	This is ubuntuc
+{% elif ansible_hostname == "centos1" -%}
+	This is centos1 with port 2222
+{% endif %}
+
+--== Ansible jinja2 if elif statement ==--
+
+{% if ansible_hostname == "ubuntuc" -%}
+	This is ubuntuc
+{% elif ansible_hostname == "centos1" -%}
+	This is centos1 with port 2222
+{% else -%}
+	This is good old {{ ansible_hostname }}
+{% endif %}
+
+--== Ansible jinja2 if variable is defined ==--
+
+{% if example_variable is defined -%}
+	example variable is defined
+{% else -%}
+	example variable id NOT defined
+{% endif %}
+
+--== Ansible jinja2 variable defined ==--
+{% set example_variable = 'defined' -%}
+{% if example_variable is defined -%}
+	variable is defined
+{% else -%}
+	variable is NOT defined
+{% endif %}
+
+--== Ansible jinja2 for statement ==--
+
+{% for entry in ansible_all_ipv4_addresses -%}
+	IP Address entry {{ loop.index }} = {{ entry }}
+{% endfor %}
+
+--== Ansible jinja2 for range
+{% for entry in range(1, 11) -%}
+	{{ entry }}
+{% endfor %}
+
+--== Ansible jinja2 for range
+{% for entry in range(10, 0, -1) -%}
+	{% if entry == 5 -%}
+		{% break %}
+	{% endif -%}   
+	{{ entry }}
+{% endfor %}
+--== Ansible jinja2 for range
+
+{% for entry in range(10, 0, -1) -%}
+	{% if entry is odd -%}
+		{% continue %}
+	{% endif -%}   
+	{{ entry }}
+{% endfor %}
+--== Ansible jinja2 filters ==--
+{{ [1, 2, 3, 4, 5] | min }}
+{{ [1, 2, 3, 4, 5] | max }}
+{{ [1, 3, 4, 4, 3, 5, 5] | unique }}
+{{ [1, 2, 3, 4, 5] | difference([2, 3, 5]) }}
+{{ ['rob', 'mike', 'sam' ] | random }}
+{{ "https://docs.ansible.com/ansible/2.5/user_guide/playbooks_filters.html" | urlsplit('hostname') }} 
+
+--==Ansible jinja2 if statement ==--
+{# If the hostname is ubuntuc, include a message -#}
+{% if ansible_hostname == "ubuntuc" -%}
+	This is ubuntuc
+{% endif %}

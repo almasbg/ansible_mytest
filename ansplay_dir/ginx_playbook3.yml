@@ -1,0 +1,29 @@
+---
+
+- hosts: ubuntu3,centos3
+
+  tasks:
+          - name: Install Epel
+            yum:
+                    name: epel-release
+                    update_cache: yes
+                    state: latest
+            when: ansible_distribution == 'CentOS'
+
+          - name: Install Nginx
+            package:
+                    name: nginx
+                    state: latest
+          - name: Install Patch
+            yum:
+                    name: patch
+                    update_cache: yes
+                    state: latest
+            when: ansible_distribution == 'CentOS'
+
+          - name: Patch nginx.conf to include site-available, disable default server entry
+            patch:
+                    src: files/nginx.conf.centos.patch
+                    dest: /etc/nginx/nginx.conf
+            when: ansible_distribution == 'CentOS'
+...

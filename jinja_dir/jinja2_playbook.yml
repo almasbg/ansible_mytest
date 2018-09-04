@@ -1,0 +1,14 @@
+---
+
+- hosts: all
+
+  tasks:
+          - name: Ansible jinja2 if
+            debug:
+                    msg: >
+                            --==Ansible jinja2 if statement ==--
+                            {# If the hostname is ubuntuc, include a message -#}
+                            {% if ansible_hostname == "ubuntuc" -%}
+                                This is ubuntuc
+                            {% endif %}
+...

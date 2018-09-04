@@ -1,0 +1,53 @@
+---
+- hosts: all
+  tasks:
+
+          - name: Make Facts dir
+            file:
+                    path: /home/vagrant/ansible/facts.d
+                    recurse: yes
+                    state: directory
+                    owner: vagrant
+          
+          - name: Copy fact 1
+            copy:
+                    src: facts.d/getdate1.fact
+                    dest: /home/vagrant/ansible/facts.d/getdate1.fact
+                    mode: 0755
+                    owner: vagrant
+
+          - name: Copy fact 2
+            copy:
+                    src: facts.d/getdate2.fact
+                    dest: /home/vagrant/ansible/facts.d/getdate2.fact
+                    mode: 0755
+                    owner: vagrant
+            
+          - name: Refresh facts
+            setup:
+                    fact_path: /home/vagrant/ansible/facts.d
+
+          - name: Show ip adresses
+            debug:
+                    msg: "{{ ansible_default_ipv4.address }}"
+
+          - name: Show custom fact 1
+            debug:
+                    msg: "{{ ansible_local.getdate1.date }}"
+
+          - name: Custom fact 2
+            debug:
+                    msg: "{{ ansible_local.getdate2.date.date }}"
+
+
+          - name: Show custom fact 1 in hostvars
+            debug:
+                    msg: "{{ hostvars[ansible_hostname].ansible_local.getdate1.date }}"
+
+
+          - name: Show custom fact 2 in hostvars
+            debug:
+                    msg: "{{ hostvars[ansible_hostname].ansible_local.getdate2.date.date }}"
+
+
+...

@@ -1,0 +1,15 @@
+---
+
+- hosts: centos1.mynet.local
+  gather_facts: false
+
+
+
+  vars_prompt:
+          - name: username
+            private: false
+
+  tasks:
+          - name: Test vars_promt
+            debug:
+                    msg: "{{ username }}"

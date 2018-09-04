@@ -1,0 +1,17 @@
+---
+
+- hosts: all
+
+  tasks:
+          - name: Ansible jinja2 for reverse range with if statement
+            debug:
+                    msg: >
+                            --== Ansible jinja2 for range
+
+                            {% for entry in range(10, 0, -1) -%}
+                                {% if entry == 5 -%}
+                                        {% break %}
+                                {% endif -%}   
+                                {{ entry }}
+                            {% endfor %}
+...

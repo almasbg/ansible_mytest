@@ -1,0 +1,11 @@
+---
+
+- hosts: linux
+  gather_facts: true
+
+  tasks:
+          - name: Test groupvars
+            debug:
+                    msg: "{{ ansible_user | default('') }}"
+
+...

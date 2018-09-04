@@ -1,0 +1,17 @@
+---
+
+- hosts: all
+
+  tasks:
+          - name: Ansible jinja2 set varible defined and check 
+            debug:
+                    msg: > 
+                            --== Ansible jinja2 variable defined ==--
+                            {% set example_variable = 'defined' -%}
+                            {% if example_variable is defined -%}
+                                variable is defined
+                            {% else -%}
+                                variable is NOT defined
+                            {% endif %}
+...
+

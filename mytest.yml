@@ -1,0 +1,29 @@
+--- 
+
+- hosts: centos1
+  
+  tasks:
+          - name: my tests
+            command: grep Port /etc/ssh/sshd_config
+            register: shell_out
+          - lineinfile:
+                  path: /etc/ssh/sshd_config
+                  regexp: "^#Port"
+                  line: "Port 22"
+            notify:
+                    Restart sshd
+          - debug:
+                    var: shell_out.stdout_lines
+          - name: copy test file
+            copy:
+                    src: /tmp/test_file
+                    dest: /tmp/
+                    mode: 775
+                    owner: vagrant
+                    
+  handlers:
+          - name: Restart sshd
+            service:
+                    name: sshd
+                    state: restarted
+...

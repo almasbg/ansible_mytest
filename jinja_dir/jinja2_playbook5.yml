@@ -1,0 +1,15 @@
+---
+
+- hosts: all
+
+  tasks:
+          - name: Ansible jinja2 for statement
+            debug:
+                    msg: > 
+                            --== Ansible jinja2 for statement ==--
+
+                            {% for entry in ansible_all_ipv4_addresses -%}
+                                IP Address entry {{ loop.index }} = {{ entry }}
+                            {% endfor %}
+...
+

@@ -1,0 +1,48 @@
+---
+
+- hosts: centos1.mynet.local
+  gather_facts: false
+
+  vars:
+          named_list:
+                  - item1
+                  - item2
+                  - item3
+        # inline_named_list:
+        #    [ item1, item2, item3 ]
+          dict:
+                dict_key: This is a dictionery value
+          inline_dict:
+                  {inline_dict_key: This is an inline dictionery value}
+
+  tasks:
+          - name: Test named dictionery dictionery 
+            debug:
+                    msg: "{{ dict }}"
+          - name: Test named dictionery dictionery key value with dictionery dot notation
+            debug:
+                    msg: "{{ dict.dict_key }}"
+          - name: Test named dictionery dictionery key value with python brackets notation
+            debug:
+                    msg: "{{ dict['dict_key'] }}"
+           #######################################
+          - name: Test inline
+            debug:
+                    msg: "{{ inline_dict }}"
+          - name: Test named inline dictionery dictionery key value with dictionery dot nonation
+            debug:
+                    msg: "{{ inline_dict.inline_dict_key }}"
+
+          - name: Test named inline dictionery dictionery  key value with brackets notation
+            debug:
+                    msg: "{{ inline_dict['inline_dict_key'] }}"
+          ######################################       
+          - name: Test named list
+            debug:
+                    msg: "{{ named_list }}"
+          - name: Test named list first item brackets notation
+            debug:
+                    msg: "{{ named_list[0] }}"
+          - name: Test named list first item notation
+            debug:
+                    msg: "{{ named_list.0 }}"

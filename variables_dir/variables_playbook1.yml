@@ -1,0 +1,31 @@
+---
+
+- hosts: centos1.mynet.local
+  gather_facts: false
+
+  vars_files:
+          - external_vars.yml
+
+  tasks:
+          - name: Test external dictionary key value
+            debug:
+                    msg: "{{ external_example_key }}"
+          - name: Test external named dictionary dictionary
+            debug:
+                    msg: "{{ external_dict }}"
+          - name: Test external named dictionary dictionary key value with dictinary dot notation
+            debug:
+                    msg: "{{ external_dict.dict_key }}"
+          - name: Test external named dictionary dictionary key value with brackets notation
+            debug:
+                    msg: "{{ external_dict['dict_key'] }}"
+          - name: Test with list
+            debug:
+                    msg: "{{ external_named_list }}"
+                    #msg: "{{ external_named_list.0 }}"
+                    #msg: "{{ external_named_list[0] }}"
+          - name: Test with list python
+            debug:
+                    #msg: "{{ external_inline_named_list }}"
+                    msg: "{{ external_inline_named_list.0 }}"
+                    #msg: "{{ external_inline_named_list[0] }}"

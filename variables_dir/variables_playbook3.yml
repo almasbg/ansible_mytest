@@ -1,0 +1,14 @@
+---
+
+- hosts: centos
+  gather_facts: true
+
+  tasks:
+          - name: Test hostvars
+            debug:
+                    msg: "{{ hostvars[ansible_hostname].ansible_port | default('') }}"
+          - name: Test hostvars with python
+            debug:
+                    msg: "{{ hostvars[ansible_hostname]['ansible_port'] }}"
+
+...

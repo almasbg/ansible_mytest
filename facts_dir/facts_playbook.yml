@@ -1,0 +1,10 @@
+---
+
+- hosts: all
+
+  tasks:
+          - name: show ip adresses
+            debug:
+                    msg: "{{ ansible_env.SSH_CLIENT }}"
+
+...

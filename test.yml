@@ -1,0 +1,27 @@
+---
+# Every YAML file should start with three dashes
+
+- Aston Martin: 
+        year_founded: 1913 
+        website: astonmartin.com
+        founder:
+                - Lionel Martin
+                - Robert Bamford
+- Fiat: 
+        year_founded: 1899
+        website: fiat.com
+        founder:
+                -Givanni Agnelli
+- Ford: 
+        year_founded: 1903
+        website: ford.com
+        founder:
+                - Henry Ford
+- Vauxhall: 
+        year_founded: 1857
+        website: vauxhall.co.uk
+        founder:
+                - Alexander Wilson
+
+# Every YAML file should end with three dashes
+---
