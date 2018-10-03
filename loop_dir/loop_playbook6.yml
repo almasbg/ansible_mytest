@@ -1,0 +1,22 @@
+---
+
+
+- hosts: linux
+
+
+  tasks:
+          - name: creating user
+            user:
+                    name: "{{ item.1 }}"
+                    comment: "{{ item.1 | title }} {{ item.0.surname }}" 
+            with_subelements:
+                    - family: 
+                             surname: Sp
+                             members:
+                                     - james
+                                     - hayley
+                                     - lily
+                                     - ademi
+
+                    - members
+...

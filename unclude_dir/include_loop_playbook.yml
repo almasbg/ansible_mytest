@@ -1,0 +1,6 @@
+---
+- hosts: centos1
+  tasks:
+        - include_tasks: include_tasks_loop.yml
+          with_items: [1, 2, 3]
+...

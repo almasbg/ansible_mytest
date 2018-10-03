@@ -1,0 +1,13 @@
+---
+
+- hosts: linux
+
+  tasks:
+          - name: Play 1 - Task 1
+            debug:
+                    msg: Play 1 - Task 1
+
+          - include: play1_task2.yml
+
+- include: play2.yml
+...

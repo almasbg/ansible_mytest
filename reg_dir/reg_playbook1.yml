@@ -1,0 +1,8 @@
+---
+
+- hosts: linux
+
+  tasks:
+          - name: Exploring register
+            command: hostname -s
+            register: host_output

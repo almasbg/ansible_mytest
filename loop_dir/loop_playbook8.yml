@@ -1,0 +1,41 @@
+---
+
+
+- hosts: linux
+
+
+  tasks:
+          - name: creating user
+            user:
+                    name: "{{ item.1 }}"
+                    comment: "{{ item.1 | title }} {{ item.0.surname }}" 
+            with_subelements:
+                    -
+                           - surname: Sp
+                             members:
+                                     - james
+                                     - hayley
+                                     - lily
+                                     - ademi
+                           - surname: Bg
+                             members:
+                                     - almas
+                                     - aizhan
+                                     - aylina
+                                     - raiym
+                           - surname: Pecci
+                             members:
+                                     - mike
+                                     - katy
+
+                    - members
+          - name: creating user directories
+            file:
+                    dest: "/home/{{ item.0 }}/{{ item.1 }}"
+                    owner: "{{ item.0 }}"
+                    group: "{{ item.0 }}"
+                    state: directory
+            with_nested:
+                    - [ james, hayley, lily, ademi, almas, aizhan, aylina, raiym, mike, katy ]
+                    - [ documents, movies, photos ]
+...

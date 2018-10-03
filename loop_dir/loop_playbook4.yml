@@ -1,0 +1,16 @@
+---
+
+
+- hosts: linux
+
+
+  tasks:
+          - name: Configure motd (message of the day)
+            user:
+                    name: "{{ item }}"
+            with_items:
+                    - james
+                    - hayley
+                    - lily
+                    - adem
+...

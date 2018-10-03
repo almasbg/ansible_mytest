@@ -1,0 +1,21 @@
+---
+
+- hosts: centos1
+
+  tasks: 
+
+        - debug:
+                msg: =============== Testing include_tasks =================
+        - include_tasks: include_tasks.yml
+          when: include_tasks_var is not defined
+
+        - debug:
+                msg: ================= Testing include =====================
+        - include: include.yml
+          when: include_var is not defined
+          #static: false
+        
+        - debug:
+                msg: =================== Testing import_tasks ==============
+        - import_tasks: import_tasks.yml
+          when: import_tasks_var is not defined

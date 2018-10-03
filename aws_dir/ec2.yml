@@ -1,0 +1,77 @@
+--- 
+
+- hosts: localhost
+  connection: local
+  gather_facts: False
+
+  #vars:
+  #       instance_type: t2.micro
+  #       security_group: ansible-webserver
+  #       image: ami-0b59bfac6be064b78
+  #       keypair: mykey
+  #       region: us-east-2
+  #       count: 2
+
+  tasks:
+          - name: create a security group
+            ec2_group:
+                    name: ansible-webserver
+                    description: Security Group for webserver
+                    region: us-east-2
+                    rules:
+                            - proto: tcp
+                              from_port: 22
+                              to_port: 22
+                              cidr_ip: 0.0.0.0/0
+                            - proto: tcp
+                              from_port: 80
+                              to_port: 80
+                              cidr_ip: 0.0.0.0/0
+             
+          - name: Launch the new EC2 Instance
+            ec2:
+                key_name: mykey
+                group: ansible-webserver
+                instance_type: t2.micro
+                image: ami-0b59bfac6be064b78
+                region: us-east-2
+                wait: true
+                exact_count: 2
+                count_tag:
+                        Name: AnsibleWEBTag
+                instance_tags:
+                        Name: Ansible
+            ignore_errors: true
+
+            
+          - name: Refresh inventory to ensure new instances
+            meta: refresh_inventory
+        
+          #- name: Add public ip
+          #  add_host:
+          #          hostname: "{{ item.public_ip }}" 
+          #          groups: ansiblehosts
+          #  with_items: "{{ ec2.instances }}" 
+
+          
+          #- name: show group
+          #  debug:
+          #          var: groups.ansiblehosts
+                     
+
+- hosts: tag_Name_Ansible
+
+  tasks:
+          - name: get hostname
+            debug:
+                    msg: "{{ ansible_hostname }}"
+
+
+
+
+
+
+
+
+
+

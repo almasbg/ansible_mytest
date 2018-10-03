@@ -1,0 +1,6 @@
+---
+
+- hosts: ubuntu3,centos3
+
+  roles:
+          - nginx

@@ -1,0 +1,11 @@
+---
+
+- set_fact:
+        import_tasks_var: foo
+
+- name: import task
+  debug:
+          msg: import task with include_tasks_var
+- name: import task 2
+  debug:
+          msg: import task 2

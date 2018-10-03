@@ -1,0 +1,19 @@
+---
+
+- hosts: linux
+
+
+  tasks:
+          - name: creating user
+            user:
+                    name: "{{ item.key }}"
+                    comment: "{{ item.value.full_name }}"
+            with_dict:
+                    james:
+                            full_name: James Sp
+
+          - name: Create sequence directories
+            file:
+                    dest: "/home/james/sequence_{{ item }}"
+                    state: directory
+            with_sequence: start=0 end=100 stride=10

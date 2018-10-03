@@ -1,0 +1,3 @@
+PLAYBOOK VARS (Ansible vars):
+
+{{ ansible_all_ipv4_addresses | to_nice_yaml }}

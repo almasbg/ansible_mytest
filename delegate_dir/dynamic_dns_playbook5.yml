@@ -1,0 +1,34 @@
+---
+
+- hosts: linux
+
+  tasks:
+
+
+          - name: add dynamic dns centos
+            command: "/usr/bin/hostsman -i dynamic_{{ ansible_hostname }}:{{ ansible_eth1.ipv4.address }}"
+            delegate_to: dnsmasq
+            when: ansible_distribution == "CentOS"
+
+          - name: add dynamic dns ubuntu
+            command: "/usr/bin/hostsman -i dynamic_{{ ansible_hostname }}:{{ ansible_enp0s8.ipv4.address }}"
+            delegate_to: dnsmasq
+            when: ansible_distribution == "Ubuntu"
+
+          - name: add dynamic removal
+            command: "/usr/bin/hostsman -r dynamic_{{ ansible_hostname }}"
+            delegate_to: dnsmasq
+            when: ansible_distribution == "Ubuntu"
+
+          - name: add dynamic removal centos
+            command: "/usr/bin/hostsman -r dynamic_{{ ansible_hostname }}"
+            delegate_to: dnsmasq
+            when: ansible_distribution == "CentOS"
+
+          - name: Reload dnsmasq
+            service:
+                    name: dnsmasq
+                    state: restarted
+            delegate_to: dnsmasq
+            run_once: true
+

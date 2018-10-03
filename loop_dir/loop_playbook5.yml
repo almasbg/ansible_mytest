@@ -1,0 +1,21 @@
+---
+
+
+- hosts: linux
+
+
+  tasks:
+          - name: Configure motd (message of the day)
+            user:
+                    name: "{{ item.key }}"
+                    comment: "{{ item.value.full_name }}" 
+            with_dict:
+                    james:
+                            full_name: James Sp
+                    hayley:
+                            full_name: Hayley Sp
+                    lily:
+                            full_name: Lily Sp            
+                    adem:
+                            full_name: Adem Sp
+...

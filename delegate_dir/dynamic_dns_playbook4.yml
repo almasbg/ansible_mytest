@@ -1,0 +1,28 @@
+---
+
+- hosts: linux
+
+  tasks:
+
+
+          - name: add dynamic dns centos
+            command: "/usr/bin/hostsman -i dynamic_{{ ansible_hostname }}:{{ ansible_eth1.ipv4.address }}"
+            delegate_to: dnsmasq
+            when: ansible_distribution == "CentOS"
+
+          - name: add dynamic dns ubuntu
+            command: "/usr/bin/hostsman -i dynamic_{{ ansible_hostname }}:{{ ansible_enp0s8.ipv4.address }}"
+            delegate_to: dnsmasq
+            when: ansible_distribution == "Ubuntu"
+
+          - name: Reload dnsmasq
+            service:
+                    name: dnsmasq
+                    state: restarted
+            delegate_to: dnsmasq
+            run_once: true
+
+          - name: Check DNS entries for all hosts
+            debug:
+                    msg: "The IPv4 address for dynamic_{{ item }} is # {{ lookup('dig', 'dynamic_{{ item }}') }}"
+            with_items: "{{ play_hosts }}"

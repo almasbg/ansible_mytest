@@ -1,0 +1,27 @@
+---
+
+- hosts: linux
+  gather_facts: false
+  serial: 2
+  tasks:
+        - name: Task 1
+          command: /bin/sleep 5
+
+        - name: Task 2
+          command: /bin/sleep 5
+          
+        - name: Task 3
+          command: /bin/sleep 5
+
+        - name: Task 4
+          command: /bin/sleep 30
+
+        - name: Task 5
+          command: /bin/sleep 5
+
+        - name: Task 6
+          command: /bin/sleep 5
+
+
+...
+

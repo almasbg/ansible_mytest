@@ -1,0 +1,26 @@
+---
+
+- hosts: linux
+  gather_facts: false
+  tasks:
+        - name: Task 1
+          command: "/bin/sleep {{ 10 |random}}"
+
+        - name: Task 2
+          command: "/bin/sleep {{ 10 |random}}"
+          
+        - name: Task 3
+          command: "/bin/sleep {{ 10 |random}}"
+
+        - name: Task 4
+          command: "/bin/sleep {{ 10 |random}}"
+
+        - name: Task 5
+          command: "/bin/sleep {{ 10 |random}}"
+
+        - name: Task 6
+          command: "/bin/sleep {{ 10 |random}}"
+
+
+...
+

@@ -1,0 +1,18 @@
+---
+
+- hosts: linux
+
+  tasks:
+          - name: Block modules being executed
+            block:
+                    - name: Example 1
+                      debug:
+                              msg: Example 1
+
+                    - name: Example 2
+                      debug:
+                              msg: Example 2
+
+                    - name: Example 3
+                      debug:
+                              msg: Example 3

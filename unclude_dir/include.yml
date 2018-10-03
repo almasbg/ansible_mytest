@@ -1,0 +1,13 @@
+---
+- set_fact:
+        include_var: foo
+
+- name: include.yml task
+  debug:
+          msg: include.yml task message
+
+- name: include.yml task 2
+  debug:
+          msg: include.yml task 2 message
+...
+

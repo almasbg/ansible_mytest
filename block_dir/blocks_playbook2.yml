@@ -1,0 +1,21 @@
+---
+
+- hosts: linux
+
+  tasks:
+          - name: Block modules being executed
+            block:
+                    - name: Example 1 Centos only
+                      debug:
+                              msg: Example 1
+                      when: ansible_distribution == 'CentOS'
+
+                    - name: Example 2 Ubuntu only
+                      debug:
+                              msg: Example 2
+                      when: ansible_distribution == 'Ubuntu'
+
+                    - name: Example 3 with items
+                      debug:
+                              msg: "Example with items - {{ item }}"
+                      with_items: ['x', 'y', 'z']

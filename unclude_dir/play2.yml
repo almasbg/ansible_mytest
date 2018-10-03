@@ -1,0 +1,13 @@
+---
+# YAML document begin with the document separtor ---
+
+- hosts: linux
+  
+  tasks:
+
+        - name: Play 2 - Task 1
+          debug:
+                msg: Play 2 - Task 1
+
+        - include: play2_task2.yml
+

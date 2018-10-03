@@ -1,0 +1,18 @@
+---
+
+- hosts: ubuntu3,centos3
+
+  tasks:
+          - name: Install Epel
+            yum:
+                    name: epel-release
+                    update_cache: yes
+                    state: latest
+            when: ansible_distribution == 'CentOS'
+
+          - name: Install Nginx
+            package:
+                    name: nginx
+                    state: latest
+
+...

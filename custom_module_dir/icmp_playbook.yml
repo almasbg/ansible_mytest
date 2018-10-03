@@ -1,0 +1,10 @@
+---
+
+- hosts: linux
+
+  tasks:
+
+          - name: test icmp module
+            icmp1:
+                    target: 127.0.0.1
+...

@@ -1,0 +1,24 @@
+---
+
+- hosts: linux
+
+
+  tasks:
+          - name: creating user
+            user:
+                    name: "{{ item.key }}"
+                    comment: "{{ item.value.full_name }}"
+            with_dict:
+                    james:
+                            full_name: James Sp
+
+          - name: Create random directories
+            file:
+                    dest: "/home/james/{{ item }}"
+                    state: directory
+            with_random_choice:
+                    - "google"
+                    - "facebook"
+                    - "apple"
+                    - "microsoft"
+
